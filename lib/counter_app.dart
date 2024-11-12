@@ -8,8 +8,9 @@ class CountdownTimerScreen extends StatefulWidget {
 
 class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
   Timer? _timer;
-  Duration _timeRemaining = Duration(minutes: 1); // Default time (1 minute)
-  Duration _initialTime = Duration(minutes: 1);
+  Duration _timeRemaining =
+      const Duration(minutes: 1); // Default time (1 minute)
+  Duration _initialTime = const Duration(minutes: 1);
   bool _isRunning = false;
 
   // Start Timer
@@ -20,10 +21,10 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
       _isRunning = true;
     });
 
-    _timer = Timer.periodic(Duration(milliseconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
       setState(() {
         if (_timeRemaining.inMicroseconds > 0) {
-          _timeRemaining = _timeRemaining - Duration(milliseconds: 1);
+          _timeRemaining = _timeRemaining - const Duration(milliseconds: 1);
         } else {
           _stopTimer();
         }
@@ -100,7 +101,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
         centerTitle: true,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.deepPurpleAccent, Colors.blueAccent],
             begin: Alignment.topCenter,
@@ -114,7 +115,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
             children: [
               Text(
                 _formatTime(_timeRemaining),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 60,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -129,9 +130,9 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
                     onPressed: _isRunning ? null : () => _pickTime(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pinkAccent,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      textStyle: TextStyle(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      textStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,9 +145,9 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           _isRunning ? Colors.redAccent : Colors.green,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      textStyle: TextStyle(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      textStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -158,9 +159,9 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
                     onPressed: _resetTimer,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orangeAccent,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      textStyle: TextStyle(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      textStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -170,7 +171,7 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
                 ],
               ),
               const SizedBox(height: 30),
-              Text(
+              const Text(
                 'Time Remaining Progress',
                 style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
