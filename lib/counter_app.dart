@@ -21,10 +21,10 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
       _isRunning = true;
     });
 
-    _timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
       setState(() {
-        if (_timeRemaining.inMicroseconds > 0) {
-          _timeRemaining = _timeRemaining - const Duration(milliseconds: 1);
+        if (_timeRemaining.inMilliseconds > 0) {
+          _timeRemaining = _timeRemaining - const Duration(milliseconds: 10);
         } else {
           _stopTimer();
         }
@@ -58,15 +58,16 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
     });
   }
 
-  // Format Duration to HH:MM:SS:μS (with microseconds)
+  // Format Duration to HH:MM:SS:MS (with two-digit milliseconds)
   String _formatTime(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String hours = twoDigits(duration.inHours);
     String minutes = twoDigits(duration.inMinutes.remainder(60));
     String seconds = twoDigits(duration.inSeconds.remainder(60));
-    String microseconds =
-        twoDigits((duration.inMicroseconds.remainder(1000000) ~/ 1000));
-    return "$hours:$minutes:$seconds:$microseconds";
+    String milliseconds = (duration.inMilliseconds.remainder(1000) ~/ 10)
+        .toString()
+        .padLeft(2, '0'); // Two digits for milliseconds
+    return "$hours:$minutes:$seconds:$milliseconds";
   }
 
   // Show Time Picker for User to Set Time
@@ -103,7 +104,10 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.deepPurpleAccent, Colors.blueAccent],
+            colors: [
+              Color.fromARGB(255, 165, 150, 209),
+              Color.fromARGB(255, 97, 100, 105)
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -173,15 +177,16 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
               const SizedBox(height: 30),
               const Text(
                 'Time Remaining Progress',
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+                style: TextStyle(
+                    color: Color.fromARGB(179, 112, 5, 94), fontSize: 16),
               ),
               const SizedBox(height: 10),
               LinearProgressIndicator(
                 borderRadius: BorderRadius.circular(5),
                 value:
-                    _timeRemaining.inMicroseconds / _initialTime.inMicroseconds,
+                    _timeRemaining.inMilliseconds / _initialTime.inMilliseconds,
                 backgroundColor: Colors.white30,
-                color: Colors.deepPurpleAccent,
+                color: const Color.fromARGB(255, 10, 3, 29),
                 minHeight: 10,
               ),
             ],
