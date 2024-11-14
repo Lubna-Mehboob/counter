@@ -98,7 +98,10 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const Text('Countdown Timer'),
+        title: const Text(
+          'Countdown Timer',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: Container(
